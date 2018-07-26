@@ -25,8 +25,9 @@ export ARCH_MTK_PLATFORM=mt6735
 #export CROSS_COMPILE=~/arm-eabi-4.9/bin/arm-eabi-
 export CROSS_COMPILE=$PWD/arm-gnu-7.x/bin/arm-gnu-linux-androideabi-
 #export CROSS_COMPILE=$PWD/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
-export KBUILD_BUILD_USER="izaqkull"
-export KBUILD_BUILD_HOST="OSX-Strec"
+#export CROSS_COMPILE=/home/dumbdevpr/Moto_E4/toolchain/linaro_arm-eabi-6.3/bin/arm-eabi-
+export KBUILD_BUILD_USER="dumbDevpr"
+export KBUILD_BUILD_HOST="OSL-Dell"
 
 
 compile_kernel ()
@@ -34,24 +35,29 @@ compile_kernel ()
  echo
  echo
  
-echo "$blue ▐▄▄▄▄▄▄ . ▐ ▄  ▐ ▄ ▪  ▄▄▄ .    ▄ •▄ ▄▄▄ .▄▄▄   ▐ ▄ ▄▄▄ .▄▄▌  
-  ·██▀▄.▀·•█▌▐█•█▌▐███ ▀▄.▀·    █▌▄▌▪▀▄.▀·▀▄ █·•█▌▐█▀▄.▀·██• "  
-echo "$yellow▪▄ ██▐▀▀▪▄▐█▐▐▌▐█▐▐▌▐█·▐▀▀▪▄    ▐▀▀▄·▐▀▀▪▄▐▀▀▄ ▐█▐▐▌▐▀▀▪▄██▪ "
-echo "$purple▐▌▐█▌▐█▄▄▌██▐█▌██▐█▌▐█▌▐█▄▄▌    ▐█.█▌▐█▄▄▌▐█•█▌██▐█▌▐█▄▄▌▐█▌▐▌
- ▀▀▀• ▀▀▀ ▀▀ █▪▀▀ █▪▀▀▀ ▀▀▀     ·▀  ▀ ▀▀▀ .▀  ▀▀▀ █▪ ▀▀▀ .▀▀▀ "
-                                                                                                     
+echo "$blue·▄▄▄▄  ▄• ▄▌• ▌ ▄ ·. ▄▄▄▄·    
+██▪ ██ █▪██▌·██ ▐███▪▐█ ▀█▪   
+▐█· ▐█▌█▌▐█▌▐█ ▌▐▌▐█·▐█▀▀█▄ "  
+echo "$yellow██. ██ ▐█▄█▌██ ██▌▐█▌██▄▪▐█   
+▀▀▀▀▀•  ▀▀▀ ▀▀  █▪▀▀▀·▀▀▀▀  "  
+echo "$yellow▄ •▄ ▄▄▄ .▄▄▄   ▐ ▄ ▄▄▄ .▄▄▌"  
+echo "$purple█▌▄▌▪▀▄.▀·▀▄ █·•█▌▐█▀▄.▀·██•  
+▐▀▀▄·▐▀▀▪▄▐▀▀▄ ▐█▐▐▌▐▀▀▪▄██▪  
+▐█.█▌▐█▄▄▌▐█•█▌██▐█▌▐█▄▄▌▐█▌▐▌
+·▀  ▀ ▀▀▀ .▀  ▀▀▀ █▪ ▀▀▀ .▀▀▀ "
+
 echo
 echo
 echo "$blue***********************************************"
-echo "          Compiling Jennie™ Kernel...          "
+echo "          Compiling Dumb™ Kernel...          "
 echo "***********************************************$nocol"
 echo ""
 #woods defconfig
 make -C $PWD O=outdir ARCH=arm woods_defconfig
 #
 make -j4 -C $PWD O=outdir ARCH=arm
-echo "$yellow Copying to outdir/Jennie $nocol"
-cp outdir/arch/arm/boot/zImage-dtb outdir/Jennie/Image
+echo "$yellow Copying to outdir/dumbkernel $nocol"
+cp outdir/arch/arm/boot/zImage-dtb outdir/dumbkernel/kernels/custom/Image
 
 if ! [ -f $ZIMAGE ];
 then
@@ -72,21 +78,21 @@ echo "$cyan█ ▄▄  ██   ▄█▄    █  █▀ ▄█    ▄     ▄�
   ▀     █          ▀       █   ██       
        ▀  "
 echo  "$cyan***********************************************"
-echo "          Packing Jennie™ Kernel...          "
+echo "          Packing Dumb™ Kernel...          "
 echo  "***********************************************$nocol"
 echo ""
-echo  "$yellow Putting Jennie™ Kernel in Recovery Flashable Zip $nocol"
+echo  "$yellow Putting Dumb™ Kernel in Recovery Flashable Zip $nocol"
 #using lazy kernel flasher
 cd outdir
-cd Jennie
+cd dumbkernel
     if 
-    [ -f outdir/Jennie/out_done ] 
+    [ -f outdir/dumbkernel/out_done ] 
     then
     rm -rf out_done
     else
     make
     mkdir -p out_done
-    cp Jennie.N7x_woods*zip* out_done
+    cp Dumb.Kernel_woods*zip* out_done
     cd ../../
     sleep 0.6;
     echo ""
@@ -94,8 +100,8 @@ cd Jennie
     echo "" "Done Making Recovery Flashable Zip"
     echo ""
     echo ""
-    echo "" "Locate Jennie™ Kernel in the following path : "
-    echo "" "outdir/Jennie/out_done"
+    echo "" "Locate Dumb™ Kernel in the following path : "
+    echo "" "outdir/dumbkernel/out_done"
     echo ""
 echo  "$green▄   █ ▄▄  █    ████▄ ██   ██▄   ▄█    ▄     ▄▀  
    █  █   █ █    █   █ █ █  █  █  ██     █  ▄▀    
@@ -106,7 +112,7 @@ echo  "$green▄   █ ▄▄  █    ████▄ ██   ██▄   ▄�
                         ▀ "                         
     echo
     echo  "$blue***********************************************"
-    echo "      Uploading Jennie™ Kernel to Web[https://transfer.sh/]"
+    echo "      Uploading Dumb™ Kernel to Web[https://transfer.sh/]"
     echo  "***********************************************$nocol"
     echo ""
     echo " l.o.a.d.i.n.g..."
@@ -114,7 +120,7 @@ echo  "$green▄   █ ▄▄  █    ████▄ ██   ██▄   ▄�
     echo "   please wait..."
     sleep 0.1;
     echo ""
-    curl --upload-file outdir/Jennie/out_done/Jennie.N7x_woods*.zip https://transfer.sh/Jennie.N7x_woods_Nougat_$BUILD_START.zip
+    curl --upload-file outdir/dumbkernel/out_done/Dumb.Kernel_woods*.zip https://transfer.sh/Dumb.Kernel_woods-v0.78_$BUILD_START.zip
     echo ""
     echo ""
     echo " uPLOADING dONE !!!"

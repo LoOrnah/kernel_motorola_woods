@@ -15,7 +15,7 @@ before_install:
 install: true
 
 script:
-  - ./blaze.sh
+  - ./compile.sh
 
 #after_success:
 #- curl --upload-file outdir/iykonzBlaze/out_done/Jennie.N7x_woods*.zip https://transfer.sh/Jennie.N7x_woods_Nougat_$(shell date -u +"%Y%m%d_%H%M").zip
